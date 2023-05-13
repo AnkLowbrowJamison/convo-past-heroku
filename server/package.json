@@ -1,5 +1,5 @@
 {
-  "name": "codex-server",
+  "name": "conversations-with-the-past",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20",
-    "openai": "^3.1.0"
+    "nodemon": "^2.0.22",
+    "openai": "^3.2.1"
   }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversation With Seneca</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="guide">
+    <div id="header">
+      <img src="/assets/Seneca 2.png" alt="Seneca" id="header-image"/>
+        <h1>Seneca</h1>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <img src="/assets/menu.png"  width="30" height="30">
+          </button>
+          <div class="dropdown-content">
+            <a href="index.html">Home</a>
+            <a href="carl_jung.html?guide=Carl_Jung">Carl Jung</a>
+            <a href="seneca.html?guide=Seneca">Seneca</a>
+            <a href="lao_tzu.html?guide=Lao_Tzu">Lao Tzu</a>
+            <a href="buddha.html?guide=Buddha">Buddha</a>
+          </div>
+        </div>
+      </div>
+    <div id="app">
+    <div id="chat_container"></div>
+    
+    <form>
+      <textarea name="prompt" rows="1" cols="1" placeholder="Ask Seneca..."></textarea>
+      <button type="submit"><img src="assets/send.svg"/></button>
+    </form>
+    <button id="clear-history" class="clear-history-button">Clear History</button>
+    </div>
+
+    <script type="module" src="/script.js?guide=Seneca"></script>
+  </body>
+</html>

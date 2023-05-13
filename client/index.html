@@ -4,19 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conversaion With Carl Jung</title>
+    <title>Home</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
-    <div id="app">
-    <div id="chat_container"></div>
-    
-    <form>
-      <textarea name="prompt" rows="1" cols="1" placeholder="Ask Jung..."></textarea>
-      <button type="submit"><img src="assets/send.svg"/></button>
-    </form>
-    </div>
+  <body class="index">
+    <header>
+        <div class="dropdown">
+          <img src="/assets/menu.png"  width="30" height="30">
+        </button>
+        <div class="dropdown-content">
+          <a href="index.html">Home</a>
+          <a href="carl_jung.html?guide=Carl_Jung">Carl Jung</a>
+          <a href="seneca.html?guide=Seneca">Seneca</a>
+          <a href="lao_tzu.html?guide=Lao_Tzu">Lao Tzu</a>
+          <a href="buddha.html?guide=Buddha">Buddha</a>
+        </div>
+        </div>
+        <img src="/assets/LOGO.png" alt="Logo" class="logo">
+    </header>
 
-    <script type="module" src="/script.js"></script>
+    <main>
+      <div class="guide-container">
+        <a href="carl_jung.html?guide=Carl_Jung"><img src="/assets/Jung 2.png" alt="Carl Jung"></a>
+        <a href="seneca.html?guide=Seneca"><img src="/assets/Seneca 2.png" alt="Seneca"></a>
+        <a href="lao_tzu.html?guide=Lao_Tzu"><img src="/assets/Lao Tzu 3.png" alt="Lao Tzu"></a>
+        <a href="buddha.html?guide=Buddha"><img src="/assets/Buddha 2.png" alt="Buddha"></a>
+    </div>
+    </main>
+
+    <footer>
+            <img src="/assets/LOGO.png" alt="Logo" class="footer-logo">
+    </footer>
   </body>
 </html>

@@ -8,31 +8,279 @@
 }
 
 body {
-  background: #3d4134;
+  font-family: "Alegreya Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* Footer */
+footer {
+  background: radial-gradient(circle, #48767c, #29454b);
+  height: 75px;
+  padding: 10px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-logo {
+  position: absolute;
+  height: 70px;
+}
+
+body.index {
+  background: radial-gradient(circle, #f7c59e, #4d211f);
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+  }
+
+body.guide {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  overflow: hidden;
+}
+
+/* HOME PAGE Header */
+header {
+  background: radial-gradient(circle, #48767c, #29454b);
+  height: 75px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+header .logo {
+  position: absolute;
+  height: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+ /* HOME PAGE BODY */
+ body.index {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.content {
+  flex-grow: 1;  /* This will make the content take up all available space */
+}
+
+/* Styles for screens larger than 1024px */
+@media (min-width: 1024px) {
+  .guide-container {
+      display: flex;
+      justify-content: space-between;
+  }
+}
+
+/* Styles for screens smaller than 1024px */
+@media (max-width: 1023px) {
+  .guide-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+  }
+}
+
+/* Styles for screens smaller than 768px */
+@media (max-width: 767px) {
+  .guide-container {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .guide-container img {
+    width: 400px;
+    height: 400px;
+    filter: drop-shadow(-15px 25px 15px rgba(0, 0, 0, 0.3));
+    object-fit: cover;
+    border-radius: 2%;
+    padding: 0;
+    margin: 15px;
+    transition: transform .5s ease-in-out;; /* Animation */
+  }
+}
+
+@media (max-width: 1023px) {
+  .guide-container img {
+    width: 300px;
+    height: 300px;
+    filter: drop-shadow(0px 25px 15px rgba(0, 0, 0, 0.3));
+    object-fit: cover;
+    border-radius: 2%;
+    padding: 0;
+    margin: 15px;
+    transition: transform .5s ease-in-out;; /* Animation */
+  }
+}
+
+@media (max-width: 767px) {
+  .guide-container img {
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(0px 25px 15px rgba(0, 0, 0, 0.3));
+    transition: filter 0.7s ease-in-out;
+    object-fit: cover;
+    border-radius: 2%;
+    padding: 0;
+    margin: 15px;
+    transition: transform .5s ease-in-out;; /* Animation */
+  }
+}
+
+.guide-container img:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+
+}
+
+main {
+  background: url('path/to/background') center/cover no-repeat;
+  min-height: calc(100vh - 75px - 100px); /* Adjust according to the height of your header and footer */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  color: white;
+  padding: 0px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: absolute;
+  margin-left: 20px;
+  left: 0;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #cecece}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*CHAT FORMATTING */
 #app {
   width: 100vw;
   height: 100vh;
-  background: url("https://storage.googleapis.com/msgsndr/EUtpd6SMttm7a8swIWwh/media/64531a983502680be1541cc9.png") center/cover no-repeat;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* GUIDE Header*/
+#header {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  height: 75px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+#header-image {
+  position: relative;
+  left: -10px;
+  width: 60px;
+  height: 60px;
 }
 
 
+/*GUIDE PAGES */
+body.Seneca {
+  background: url("/assets/SenecaBG.png") center/cover no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body.Carl_Jung {
+  background: url('/assets/Jung BG2.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body.Lao_Tzu {
+  background: url('/assets/Lao TzuBG.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body.Buddha {
+  background: url('/assets/BuddhaBG.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* CHAT */
 #chat_container {
   flex: 1;
   width: 75%;
+  max-width: 1280px;
   height: 100%;
   overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 25px;
+  margin-top: 10px;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -60,10 +308,9 @@ body {
 }
 
 .chat {
-  width: 100%;
+  width: 75%;
   max-width: 1280px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -74,9 +321,7 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 5px;
-
   background: #5436DA;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,10 +339,8 @@ body {
 
 .message {
   flex: 1;
-
   color: #dcdcdc;
   font-size: 20px;
-
   max-width: 100%;
   overflow-x: scroll;
 
@@ -108,7 +351,6 @@ body {
    * The default value for the white-space property in CSS is "normal". This tells the browser to collapse multiple white space characters into a single space, and to wrap text onto multiple lines as needed to fit within its container.
   */
   white-space: pre-wrap; 
-
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -127,7 +369,6 @@ form {
   margin-bottom: 25px;
   opacity: 85%;
   border-radius: 10px;
-
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -135,10 +376,8 @@ form {
 
 textarea {
   width: 100%;
-
   color: #fff;
   font-size: 18px;
-
   padding: 10px;
   background: transparent;
   border-radius: 5px;
@@ -156,4 +395,28 @@ button {
 form img {
   width: 30px;
   height: 30px;
+  opacity: 60%;
+}
+
+.clear-history-button {
+  color: rgb(230, 222, 222);
+  border:rgb(255, 255, 255)solid black;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  background: #252637;
+  border-radius: 10px;
+  opacity: 90%;
+}
+.clear-history-button:hover {
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  background: #717171;
+  border-radius: 10px;
+  opacity: 90%;
+  
 }

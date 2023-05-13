@@ -10,12 +10,10 @@ function loader(element) {
     element.textContent = ''
 
     loadInterval = setInterval(() => {
-        // Update the text content of the loading indicator
-        element.textContent += '.';
-
-        // If the loading indicator has reached three dots, reset it
         if (element.textContent === '....') {
             element.textContent = '';
+        } else {
+            element.textContent += '.';
         }
     }, 300);
 }
@@ -33,9 +31,6 @@ function typeText(element, text) {
     }, 10)
 }
 
-// generate unique ID for each message div of bot
-// necessary for typing text effect for that specific reply
-// without unique ID, typing text will work on every element
 function generateUniqueId() {
     const timestamp = Date.now();
     const randomNumber = Math.random();
@@ -50,10 +45,7 @@ function chatStripe(isAi, value, uniqueId) {
         <div class="wrapper ${isAi && 'ai'}">
             <div class="chat">
                 <div class="profile">
-                    <img 
-                      src=${isAi ? bot : user} 
-                      alt="${isAi ? 'bot' : 'user'}" 
-                    />
+                    <img src=${isAi ? bot : user} alt="${isAi ? 'bot' : 'user'}" />
                 </div>
                 <div class="message" id=${uniqueId}>${value}</div>
             </div>
@@ -62,60 +54,106 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
-const handleSubmit = async (e) => {
-    e.preventDefault()
+const getGuideFromURL = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('guide') || 'DefaultGuide';
+}
 
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const guide = getGuideFromURL();
     const data = new FormData(form)
 
-    // user's chatstripe
     chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
 
-    // to clear the textarea input 
+    const conversation = JSON.parse(localStorage.getItem(guide)) || [];
+    conversation.push({ role: 'user', content: data.get('prompt') });
+    localStorage.setItem(guide, JSON.stringify(conversation));
+
     form.reset()
 
-    // bot's chatstripe
     const uniqueId = generateUniqueId()
     chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
 
-    // to focus scroll to the bottom 
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    // specific message div 
     const messageDiv = document.getElementById(uniqueId)
 
-loader (messageDiv);
+    loader(messageDiv);
 
-//fetch data from server
+    const response = await fetch(`http://localhost:8080/chat/${guide}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            prompt: data.get('prompt')
+        })
+    })
 
-const response = await fetch('http://localhost:8080', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-     },
-     body: JSON.stringify({
-        prompt: data.get('prompt')
-     })
-})
+    clearInterval(loadInterval);
+    messageDiv.innerHTML = " "
 
-clearInterval(loadInterval);
-messageDiv.innerHTML = " "
+    if (response.ok) {
+        const data = await response.json();
+        const parsedData = data.bot.trim();
 
-if (response.ok) {
-    const data = await response.json();
-    const parsedData = data.bot.trim(); // trims any trailing spaces/'\n' 
+        typeText(messageDiv, parsedData);
 
-    typeText(messageDiv, parsedData);
-} else {
-    const err = await response.text();
+        conversation.push({ role: 'bot', content: parsedData });
+        localStorage.setItem(guide, JSON.stringify(conversation));
+    } else {
+        const err = await response.text();
 
-    messageDiv.innerHTML = "Something went wrong"
-    alert(err);
-}
-}
-
-form.addEventListener('submit', handleSubmit)
-form.addEventListener('keyup', (e) => {
-    if (e.keyCode === 13) {
-        handleSubmit(e)
+        messageDiv.innerHTML = "Something went wrong"
+        alert(err);
     }
-})
+}
+
+function loadConversation() {
+    const guide = getGuideFromURL();
+    const conversation = JSON.parse(localStorage.getItem(guide)) || [];
+
+    for (let message of conversation) {
+        const uniqueId = generateUniqueId();
+        chatContainer.innerHTML += chatStripe(message.role === 'bot', message.content, uniqueId);
+    }
+}
+
+window.onload = function() {
+    let guide = getGuideFromURL();
+    document.body.className = guide; // this will add the guide name as a class to the body
+
+    form.addEventListener('submit', handleSubmit);
+    form.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            handleSubmit(e);
+        }
+    });
+
+    loadConversation();
+
+    // Scroll to the last message when the page loads
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+  // Get the button by its id
+  const clearHistoryButton = document.getElementById('clear-history');
+
+  // Add an event listener to the button
+  clearHistoryButton.addEventListener('click', function() {
+    // Get the guide from the URL
+    let guide = getGuideFromURL();
+  
+    // Clear the localStorage for the guide
+    localStorage.removeItem(guide);
+  
+    // Clear the chat container
+    chatContainer.innerHTML = '';
+  
+    // Optionally, you could also display a confirmation message or reload the page
+    // alert('Chat history cleared!');
+    // location.reload();
+  });
+
