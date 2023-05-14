@@ -60,8 +60,7 @@ app.post('/chat/:guide', async (req, res) => {
     res.status(500).send(error || 'Something went wrong');
   }
   console.log("Script loaded");
-
 });
 
-
-app.listen(8080, () => console.log('AI server started on http://localhost:8080'));
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log(`AI server started on http://localhost:${port}`));
