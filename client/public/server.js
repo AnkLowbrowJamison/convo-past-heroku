@@ -10,6 +10,7 @@ const openaiApiKey = process.env.OPENAI_API_KEY;
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 app.get('/', async (_req, res) => {
   res.status(200).send({

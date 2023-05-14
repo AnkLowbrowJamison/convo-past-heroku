@@ -3,6 +3,7 @@ import user from './assets/user.svg'
 
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
+const HEROKU_APP_URL = 'https://convo-past-v1.herokuapp.com'; // replace with your Heroku app's URL
 
 let loadInterval
 
@@ -82,7 +83,7 @@ const handleSubmit = async (e) => {
 
     loader(messageDiv);
 
-    const response = await fetch(`http://localhost:8080/chat/${guide}`, {
+    const response = await fetch(`${HEROKU_APP_URL}/chat/${guide}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -120,7 +121,6 @@ function loadConversation() {
         chatContainer.innerHTML += chatStripe(message.role === 'bot', message.content, uniqueId);
     }
 }
-
 window.onload = function() {
     let guide = getGuideFromURL();
     document.body.className = guide; // this will add the guide name as a class to the body
@@ -138,22 +138,17 @@ window.onload = function() {
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-  // Get the button by its id
-  const clearHistoryButton = document.getElementById('clear-history');
+// Get the button by its id
+const clearHistoryButton = document.getElementById('clear-history');
 
-  // Add an event listener to the button
-  clearHistoryButton.addEventListener('click', function() {
+// Add an event listener to the button
+clearHistoryButton.addEventListener('click', function() {
     // Get the guide from the URL
     let guide = getGuideFromURL();
-  
+
     // Clear the localStorage for the guide
     localStorage.removeItem(guide);
-  
+
     // Clear the chat container
     chatContainer.innerHTML = '';
-  
-    // Optionally, you could also display a confirmation message or reload the page
-    // alert('Chat history cleared!');
-    // location.reload();
-  });
-
+});
