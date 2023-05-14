@@ -63,5 +63,7 @@ app.post('/chat/:guide', async (req, res) => {
   console.log("Script loaded");
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`AI server started on http://localhost:${port}`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
